@@ -11,8 +11,13 @@
 </head>
 <body>
     @include('user/header')
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
     <div class="show">
+        
     <div class="book-container">
+        
         <div class="book-image">
             <img src="{{ asset('images/' . $book->image) }}" alt="{{ $book->title }}">
         </div>
@@ -27,6 +32,7 @@
             <form action="{{ route('cart.add', $book->id) }}" method="POST">
                 @csrf
                 <button type="submit">Thêm vào giỏ hàng</button>
+                
             </form>
         </div>
     </div>
@@ -42,7 +48,7 @@
                     <form action="{{ route('review.delete', $review->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button style="background-color: rgb(234, 0, 0);" type="submit" onclick="return confirm('Bạn có chắc chắn muốn xóa đánh giá này?');">Xóa</button>
+                        <button style="background-color: rgb(234, 0, 0);" type="submit" >Xóa</button>
                     </form>
                     @endif
                 </li>

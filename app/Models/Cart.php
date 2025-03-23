@@ -15,6 +15,6 @@ class Cart extends Model
 
     public function book()
     {
-        return $this->belongsTo(Book::class);
+        return $this->belongsTo(Book::class); //1 Cart thuộc về 1 sách
     }
 }

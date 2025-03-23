@@ -15,18 +15,19 @@ class OrderController extends Controller
     // Danh sách đơn hàng
     public function index(Request $request)
 {
-    $orders = Order::query();
+    $query = Order::query();
 
-    if ($request->has('search')) {
-        $orders->where('customer_name', 'like', '%' . $request->search . '%')
-               ->orWhere('address', 'like', '%' . $request->search . '%');
+    // Tìm kiếm theo tên
+    if ($request->has('search') && $request->search != '') {
+        $query->where('name', 'like', '%' . $request->search . '%');
     }
 
-    if ($request->has('status')) {
-        $orders->where('status', $request->status);
+    // Lọc theo trạng thái
+    if ($request->has('status') && $request->status != '') {
+        $query->where('status', $request->status);
     }
 
-    $orders = $orders->paginate(10);
+    $orders = $query->paginate(5);
     return view('admin/manageo', compact('orders'));
 }
 

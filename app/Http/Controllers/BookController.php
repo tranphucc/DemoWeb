@@ -66,26 +66,30 @@ class BookController extends Controller
 
     public function store(Request $request)
 {
-    $validated = $request->validate([
-        'title' => 'required|string|max:255',
-        'author' => 'required|string|max:255',
-        'price' => 'required|numeric|min:0',
+    $request->validate([
+        'title' => 'required',
+        'author' => 'required',
+        'publisher' => 'required',
+        'price' => 'required|numeric',
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'publisher' => 'nullable|string|max:255',
     ]);
 
-    // Xử lý ảnh nếu có
+    $imageName = null;
     if ($request->hasFile('image')) {
         $file = $request->file('image');
-        $filename = time() . '.' . $file->getClientOriginalExtension();
-        $file->move(public_path('images'), $filename);
-        $validated['image'] = $filename; // Sửa lỗi lưu ảnh
+        $imageName = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('images'), $imageName);
     }
 
-    // Thêm sách vào database
-    Book::create($validated);
+    Book::create([
+        'title' => $request->title,
+        'author' => $request->author,
+        'publisher' => $request->publisher,
+        'price' => $request->price,
+        'image' => $imageName, // Lưu tên file vào DB (nếu có)
+    ]);
 
-    return redirect()->route('admin.manageb.index5')->with('success', 'Sách đã được thêm thành công!');
+    return redirect()->route('admin.manageb.index5')->with('success', 'Thêm sách thành công!');
 }
 
     public function edit($id)
@@ -130,15 +134,21 @@ class BookController extends Controller
     return redirect()->route('admin.manageb.index5')->with('success', 'Sách đã được cập nhật thành công!');
 }
 
-    public function destroy(Book $book)
-    {
-    if ($book->image && file_exists(public_path($book->image))) {
-        unlink(public_path($book->image));
+public function destroy($id)
+{
+    $book = Book::findOrFail($id);
+
+    // Xóa luôn file ảnh trong thư mục public/images (nếu cần)
+    $imagePath = public_path('images/' . $book->image);
+    if (file_exists($imagePath)) {
+        unlink($imagePath);
     }
 
     $book->delete();
-    return redirect()->route('admin.manageb.index5')->with('success', 'Sách đã được xóa!');
-    }
+
+    return redirect()->route('admin.manageb.index5')->with('success', 'Xóa sách thành công!');
+}
+
 
     public function show($id)
     {

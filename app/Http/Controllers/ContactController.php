@@ -55,7 +55,7 @@ public function index2()
 {
     {
         // Lấy tất cả dữ liệu liên hệ
-        $contacts = Contact::all();
+        $contacts = Contact::paginate(5);
         
         // Trả về view và truyền dữ liệu vào
         return view('admin.managec', compact('contacts'));

@@ -42,6 +42,9 @@
             @endforeach
         </tbody>
     </table>
+    <div class="pagination">
+        {{ $contacts->links() }}
+    </div>
     @include('footer')
 </body>
 </html>

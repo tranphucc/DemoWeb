@@ -12,12 +12,15 @@
 <body>
     @include('admin.header')
     <h2>Quản lý Sách</h2>
-    <form method="POST" action="{{ route('admin.manageb.store') }}" enctype="multipart/form-data">
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+    <form method="POST" enctype="multipart/form-data" action="{{ route('admin.manageb.store') }}">
         @csrf
         <input type="text" name="title" placeholder="Tiêu đề" required>
         <input type="text" name="author" placeholder="Tác giả" required>
         <input type="text" name="price" placeholder="Giá" required>
-        <input type="file" name="image" accept="images/*"required>
+        <input type="file" name="image">
         <input type="text" name="publisher" placeholder="Nhà xuất bản"required>
         <button type="submit">Thêm Sách</button>
     </form>
@@ -35,10 +38,11 @@
         <tr>
             <td>
                 @if($book->image)
-                    <img src="{{ asset('images/' . $book->image) }}" width="100">
+                <img src="{{ asset('images/' . $book->image) }}" alt="{{ $book->title }}" width="100px">
                 @else
                     <p>Chưa có ảnh</p>
                 @endif
+                
             </td>            
             <td>{{ $book->title }}</td>
             <td>{{ $book->author }}</td>
