@@ -1,4 +1,4 @@
-# ĐỒ ÁN CHUYÊN NGÀNH - NHÓM 2 
+# ĐỒ ÁN CƠ SỞ NGÀNH - NHÓM 2 
 
 *Khoa Công Nghệ Thông Tin - Học Viện Hàng Không Việt Nam*  
 
