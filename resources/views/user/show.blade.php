@@ -26,7 +26,6 @@
             <p>Tác giả: {{ $book->author }}</p>
             <h4>Giá: {{ number_format($book->price, 0, ',', '.') }}đ</h4>
             <p>Nhà xuất bản: {{ $book->publisher }}</p>
-            <p>{{ $book->description }}</p>
 
             
             <form action="{{ route('cart.add', $book->id) }}" method="POST">

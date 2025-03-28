@@ -21,7 +21,6 @@
             <p>Tác giả: {{ $book->author }}</p>
             <h4>Giá: {{ number_format($book->price, 0, ',', '.') }}đ</h4>
             <p>Nhà xuất bản: {{ $book->publisher }}</p>
-            <p>{{ $book->description }}</p>
 
             <p><a href="{{ route('login') }}">Đăng nhập</a> để viết đánh giá và thêm vào giỏ hàng.</p>
         </div>
