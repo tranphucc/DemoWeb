@@ -1,6 +1,6 @@
 # ĐỒ ÁN CƠ SỞ NGÀNH - NHÓM 2 
 
-*Khoa Công Nghệ Thông Tin - Học Viện Hàng Không Việt Nam*  
+Khoa Công Nghệ Thông Tin - Học Viện Hàng Không Việt Nam
 
 ## 📖 Đề tài: Phát Triển Hệ Thống Website Bán Sách Sử Dụng Laravel
 
