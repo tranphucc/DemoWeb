@@ -14,7 +14,7 @@ body {
     display: flex;
     flex-direction: column;
     background-color: #f8f9fa;
-    color: #333;
+    color: #333;/*.*/
 }
 
 nav ul {
